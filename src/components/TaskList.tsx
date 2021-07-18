@@ -18,18 +18,21 @@ export function TaskList() {
     if(!newTaskTitle) return;    
 
     const newTask = {
-      id: Date.now()+Math.random(),
+      id: Date.now(),
       title: newTaskTitle,
       isComplete: false
     };
 
     setTasks(oldState => [...oldState, newTask]);
-    setNewTaskTitle('');
-    
+    setNewTaskTitle('');    
   }
 
   function handleToggleTaskCompletion(id: number) {
-     
+     const newTasks = tasks.map(
+       task => task.id === id ? { 
+       ...task, isComplete: !task.isComplete
+      } : task);
+     setTasks(newTasks);
   }
 
   function handleRemoveTask(id: number) {
